@@ -2,16 +2,13 @@
 
 /* ============================================================
    ProcessSteps — 4 numbered steps. Massive numerals are the
-   primary design element. Each row pinned briefly via
-   ScrollTrigger so the number reveals with a clip-path mask.
+   primary design element. Reveal animations are pure CSS:
+     • numeral + title use the global .reveal-inner keyframe
+     • body uses .processBody fade-up keyframe defined in module
+   No JS animation logic — text always becomes visible.
    ============================================================ */
 
-import { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from './ProcessSteps.module.css';
-
-if (typeof window !== 'undefined') gsap.registerPlugin(ScrollTrigger);
 
 const STEPS = [
   {
@@ -37,41 +34,18 @@ const STEPS = [
 ];
 
 export default function ProcessSteps() {
-  const root = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.utils.toArray<HTMLElement>(`.${styles.row}`).forEach((row) => {
-        const num = row.querySelector(`.${styles.num} .reveal-inner`);
-        const title = row.querySelector(`.${styles.title} .reveal-inner`);
-        const body = row.querySelector(`.${styles.body}`);
-        gsap.set([num, title], { yPercent: 110 });
-        gsap.set(body, { opacity: 0, y: 24 });
-        ScrollTrigger.create({
-          trigger: row,
-          start: 'top 80%',
-          once: true,
-          onEnter: () => {
-            gsap.to(num, { yPercent: 0, duration: 1.1, ease: 'power4.out' });
-            gsap.to(title, { yPercent: 0, duration: 1.1, ease: 'power4.out', delay: 0.06 });
-            gsap.to(body, { opacity: 1, y: 0, duration: 1, ease: 'power3.out', delay: 0.18 });
-          },
-        });
-      });
-    }, root);
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <div ref={root} className={styles.wrap}>
-      {STEPS.map((s) => (
-        <div key={s.n} className={styles.row}>
+    <div className={styles.wrap}>
+      {STEPS.map((s, i) => (
+        <div key={s.n} className={styles.row} style={{ ['--row' as string]: i }}>
           <div className={styles.num}>
             <span className="reveal-inner">{s.n}</span>
           </div>
           <div className={styles.text}>
             <h3 className={styles.title}>
-              <span className="reveal-inner">{s.title}</span>
+              <span className="reveal-inner" style={{ ['--rd' as string]: '0.06s' }}>
+                {s.title}
+              </span>
             </h3>
             <p className={styles.body}>{s.body}</p>
           </div>

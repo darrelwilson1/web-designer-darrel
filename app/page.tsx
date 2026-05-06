@@ -1,7 +1,8 @@
 /* ============================================================
    HOME ( / )
    Sections in order:
-     1. Hero — headline + 3D scene + CTA with red glow
+     1. Hero — index/live meta + headline + 3D scene + CTAs +
+                 trust strip + scroll cue & counter
      2. Intro — short positioning statement
      3. Services teaser (4 cards with 3D tilt)
      4. Marquee strip
@@ -47,27 +48,59 @@ const SERVICES_TEASER = [
   },
 ];
 
+const TRUST_LOGOS = ['Halcyon', 'Northbound', 'Vertex', 'Soma', 'Origin'];
+
 export default function Home() {
   return (
     <>
-      {/* ---------- HERO ---------- */}
+      {/* ============================================================
+          HERO — modern composite:
+            • top-corner index + live availability pill
+            • eyebrow / headline / sub / dual CTA
+            • client trust strip
+            • Three.js scene on the right
+            • bottom scroll cue (left) + counter (right)
+          ============================================================ */}
       <section className={styles.hero}>
+        {/* top corner meta strip */}
+        <div className={styles.heroMeta}>
+          <span className={styles.heroIndex}>(00) Wilson · 2026</span>
+          <span className={styles.heroLive}>
+            <span className={styles.liveDot} aria-hidden />
+            Available · Q3 2026
+          </span>
+        </div>
+
         <div className={styles.heroLeft}>
           <div className={styles.eyebrowRow}>
-            <span>Wilson Studio · est. 2014</span>
+            <span>Independent · Brooklyn · Lisbon · est. 2014</span>
           </div>
+
           <h1 className={styles.heroTitle}>
-            <RevealText>We design brands</RevealText>{' '}
-            <RevealText delay={0.05}>that won’t be</RevealText>{' '}
-            <RevealText delay={0.1}>ignored.</RevealText>
+            <RevealText>We design</RevealText>{' '}
+            <RevealText delay={0.05}>brands that</RevealText>{' '}
+            <RevealText delay={0.1}>refuse to</RevealText>{' '}
+            <RevealText delay={0.15}>blend in.</RevealText>
           </h1>
+
           <p className={styles.heroSub}>
             An independent design and engineering studio. We build identities, products, and digital
-            experiences for ambitious teams who would rather lead than blend in.
+            experiences for ambitious teams who would rather lead than follow.
           </p>
+
           <div className={styles.heroCtas}>
             <CTAButton href="/work">See the work</CTAButton>
             <CTAButton href="/contact" variant="ghost">Start a project</CTAButton>
+          </div>
+
+          {/* trust strip — recently shipped clients */}
+          <div className={styles.heroTrust}>
+            <span className={styles.trustLabel}>Recently shipped</span>
+            <div className={styles.trustLogos}>
+              {TRUST_LOGOS.map((c) => (
+                <span key={c} data-cursor="link">{c}</span>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -75,14 +108,18 @@ export default function Home() {
           <HeroScene />
         </div>
 
-        <span className={styles.scrollHint}>Scroll</span>
+        <span className={styles.scrollHint}>Scroll to explore</span>
+        <span className={styles.scrollCounter}>
+          <strong>06</strong>
+          <span>/ sections</span>
+        </span>
       </section>
 
       {/* ---------- INTRO ---------- */}
-      <section className={`section`}>
+      <section className="section">
         <div className="shell">
           <div className={styles.intro}>
-            <span className="eyebrow">01 · Studio</span>
+            <span className={styles.introIndex}>01 · Studio</span>
             <h2 className={styles.introHead}>
               <RevealText>We are a small team</RevealText>{' '}
               <RevealText delay={0.05}>of designers and engineers</RevealText>{' '}

@@ -1,24 +1,23 @@
 'use client';
 
 /* ============================================================
-   RevealText — splits a string into word-spans, each with an
-   inner translateY mask. ScrollTrigger plays a stagger reveal
-   when the element enters the viewport.
+   RevealText — splits text into per-word spans inside an
+   overflow-hidden mask. Each word animates up via a CSS
+   keyframe (defined in globals.css). No JS dependency, so the
+   reveal cannot get stuck hidden — even if scripts fail.
+
+   Stagger is delivered via a CSS custom property (--rd) on
+   each .reveal-inner so we get the same staggered cadence as
+   the original GSAP version.
    ============================================================ */
-
-import { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 type Props = {
   as?: keyof JSX.IntrinsicElements;
   children: string;
   className?: string;
+  /** seconds before the first word starts */
   delay?: number;
+  /** seconds between each word */
   stagger?: number;
 };
 
@@ -27,41 +26,21 @@ export default function RevealText({
   children,
   className,
   delay = 0,
-  stagger = 0.05,
+  stagger = 0.06,
 }: Props) {
-  const ref = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const lines = el.querySelectorAll<HTMLElement>('.reveal-inner');
-    gsap.set(lines, { yPercent: 110 });
-
-    const trigger = ScrollTrigger.create({
-      trigger: el,
-      start: 'top 90%',
-      once: true,
-      onEnter: () => {
-        gsap.to(lines, {
-          yPercent: 0,
-          duration: 1.1,
-          ease: 'power4.out',
-          stagger,
-          delay,
-        });
-      },
-    });
-    return () => trigger.kill();
-  }, [children, delay, stagger]);
-
   const words = children.split(' ');
 
   return (
     // @ts-expect-error dynamic tag
-    <Tag ref={ref} className={className}>
+    <Tag className={className}>
       {words.map((w, i) => (
         <span key={i} className="reveal" style={{ marginRight: '0.25em' }}>
-          <span className="reveal-inner">{w}</span>
+          <span
+            className="reveal-inner"
+            style={{ ['--rd' as string]: `${delay + i * stagger}s` }}
+          >
+            {w}
+          </span>
         </span>
       ))}
     </Tag>

@@ -8,8 +8,8 @@
   --fg: #ffffff;
   --accent: #ff2d2d;
   --accent-glow: rgba(255, 45, 45, 0.45);
-  --muted: rgba(255, 255, 255, 0.82);
-  --line: rgba(255, 255, 255, 0.12);
+  --muted: rgba(255, 255, 255, 0.92);
+  --line: rgba(255, 255, 255, 0.14);
 
   --max-w: 1440px;
   --pad-x: clamp(20px, 4vw, 80px);
@@ -88,7 +88,7 @@ img, svg, canvas { display: block; max-width: 100%; }
   font-size: 12px;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: #fff;
 }
 .body {
   font-weight: 400;
@@ -115,7 +115,10 @@ img, svg, canvas { display: block; max-width: 100%; }
   width: 100%;
 }
 
-/* ---------- Reveal mask animation ---------- */
+/* ---------- Reveal mask animation ----------
+   Pure CSS so it can never get stuck hidden. The keyframe runs
+   automatically on mount with a per-word stagger via --rd.
+   ============================================================ */
 .reveal {
   display: inline-block;
   overflow: hidden;
@@ -123,8 +126,16 @@ img, svg, canvas { display: block; max-width: 100%; }
 }
 .reveal-inner {
   display: inline-block;
-  transform: translateY(110%);
   will-change: transform;
+  animation: revealUp 1.05s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--rd, 0s);
+}
+@keyframes revealUp {
+  from { transform: translateY(110%); }
+  to   { transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal-inner { animation: none; transform: none; }
 }
 
 /* ---------- Reduced motion ---------- */

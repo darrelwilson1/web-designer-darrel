@@ -2,25 +2,99 @@
    HOME PAGE
    ============================================================ */
 
+/* ---------- HERO ---------- */
 .hero {
   position: relative;
   min-height: 100vh;
   display: grid;
   grid-template-columns: 1.05fr 1fr;
   align-items: center;
-  padding: clamp(120px, 16vh, 180px) var(--pad-x) clamp(60px, 10vh, 120px);
+  padding: clamp(140px, 16vh, 200px) var(--pad-x) clamp(80px, 12vh, 140px);
   overflow: hidden;
+  isolation: isolate;
 }
 @media (max-width: 900px) {
-  .hero { grid-template-columns: 1fr; }
+  .hero { grid-template-columns: 1fr; padding-top: 130px; }
+}
+
+/* Soft red glow behind the 3D scene + ambient gradients */
+.hero::before {
+  content: '';
+  position: absolute;
+  right: -8vw;
+  top: 0;
+  bottom: 0;
+  width: 70vw;
+  background: radial-gradient(ellipse at 60% 50%, rgba(255,45,45,0.18) 0%, rgba(255,45,45,0) 60%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Subtle grain overlay — modern noise texture */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* Top corner meta strip — index + live availability */
+.heroMeta {
+  position: absolute;
+  top: clamp(96px, 12vh, 130px);
+  left: var(--pad-x);
+  right: var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 4;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #fff;
+}
+.heroIndex {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.heroIndex::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: #fff;
+}
+.heroLive {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 45, 45, 0.5);
+  background: rgba(255, 45, 45, 0.08);
+  backdrop-filter: blur(8px);
+}
+.liveDot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent);
+  animation: livePulse 1.6s ease-in-out infinite;
+}
+@keyframes livePulse {
+  50% { opacity: 0.5; transform: scale(1.3); }
 }
 
 .heroLeft {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   display: flex;
   flex-direction: column;
-  gap: clamp(24px, 4vw, 48px);
+  gap: clamp(28px, 3.5vw, 44px);
 }
 
 .eyebrowRow {
@@ -31,7 +105,7 @@
   font-weight: 700;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: #fff;
 }
 .eyebrowRow::before {
   content: '';
@@ -40,19 +114,25 @@
 
 .heroTitle {
   font-weight: 900;
-  font-size: clamp(48px, 9vw, 168px);
-  line-height: 0.9;
-  letter-spacing: -0.04em;
+  font-size: clamp(56px, 9.5vw, 184px);
+  line-height: 0.88;
+  letter-spacing: -0.045em;
   text-transform: uppercase;
+  color: #fff;
 }
 .heroTitle .accent {
   color: var(--accent);
   font-style: italic;
   font-weight: 900;
 }
+.heroTitle .stroke {
+  -webkit-text-stroke: 1.5px #fff;
+  color: transparent;
+  font-style: italic;
+}
 
 .heroSub {
-  font-size: clamp(15px, 1.2vw, 19px);
+  font-size: clamp(16px, 1.2vw, 19px);
   line-height: 1.55;
   max-width: 520px;
   color: #fff;
@@ -60,14 +140,62 @@
 
 .heroCtas { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
 
-.heroRight {
-  position: relative;
-  height: clamp(420px, 80vh, 720px);
+/* Trust strip — clients we’ve recently worked with */
+.heroTrust {
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 3vw, 36px);
+  margin-top: clamp(8px, 2vw, 16px);
+  padding-top: clamp(24px, 3vw, 40px);
+  border-top: 1px solid var(--line);
+  flex-wrap: wrap;
 }
-@media (max-width: 900px) {
-  .heroRight { height: 60vh; margin-top: 30px; order: -1; }
+.trustLabel {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.trustLabel::before {
+  content: '';
+  width: 18px; height: 1px;
+  background: var(--accent);
+}
+.trustLogos {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(18px, 2.5vw, 32px);
+  flex-wrap: wrap;
+}
+.trustLogos span {
+  font-size: clamp(15px, 1.3vw, 19px);
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: #fff;
+  opacity: 0.75;
+  transition: opacity 0.35s var(--ease), color 0.35s var(--ease);
+  cursor: none;
+}
+.trustLogos span:hover {
+  opacity: 1;
+  color: var(--accent);
 }
 
+.heroRight {
+  position: relative;
+  height: clamp(420px, 82vh, 760px);
+  z-index: 2;
+}
+@media (max-width: 900px) {
+  .heroRight { height: 56vh; margin-top: 30px; order: -1; }
+}
+
+/* Bottom-left scroll cue */
 .scrollHint {
   position: absolute;
   left: var(--pad-x);
@@ -79,13 +207,13 @@
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: #fff;
   z-index: 3;
 }
 .scrollHint::before {
   content: '';
   width: 36px; height: 1px;
-  background: rgba(255,255,255,0.4);
+  background: #fff;
   animation: scrollLine 2.4s ease-in-out infinite;
   transform-origin: left;
 }
@@ -94,7 +222,34 @@
   50%      { transform: scaleX(1); }
 }
 
-/* --- intro section under hero --- */
+/* Bottom-right scroll counter (modern flourish) */
+.scrollCounter {
+  position: absolute;
+  right: var(--pad-x);
+  bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 3;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #fff;
+}
+.scrollCounter strong {
+  font-weight: 900;
+  font-size: 28px;
+  letter-spacing: -0.03em;
+  color: #fff;
+  line-height: 1;
+}
+.scrollCounter span {
+  color: rgba(255,255,255,0.6);
+}
+@media (max-width: 600px) { .scrollCounter { display: none; } }
+
+/* ---------- INTRO ---------- */
 .intro {
   display: grid;
   grid-template-columns: 1fr 1.4fr;
@@ -104,12 +259,27 @@
 @media (max-width: 800px) {
   .intro { grid-template-columns: 1fr; }
 }
+.introIndex {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #fff;
+}
+.introIndex::before {
+  content: '';
+  width: 28px; height: 1px; background: var(--accent);
+}
 .introHead {
   font-weight: 900;
   font-size: clamp(36px, 5vw, 72px);
   line-height: 1;
   letter-spacing: -0.025em;
   text-transform: uppercase;
+  color: #fff;
 }
 .introHead em {
   font-style: italic;
@@ -122,7 +292,7 @@
   color: #fff;
 }
 
-/* --- services teaser --- */
+/* ---------- SERVICES TEASER ---------- */
 .servicesGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -133,7 +303,7 @@
   .servicesGrid { grid-template-columns: 1fr; }
 }
 
-/* --- shared section header --- */
+/* ---------- SHARED SECTION HEADER ---------- */
 .sectionHead {
   display: flex;
   justify-content: space-between;
@@ -148,18 +318,19 @@
   line-height: 0.95;
   letter-spacing: -0.03em;
   text-transform: uppercase;
+  color: #fff;
 }
 .sectionMeta {
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: #fff;
   max-width: 300px;
   text-align: right;
 }
 
-/* --- featured work parallax block --- */
+/* ---------- FEATURED WORK PARALLAX MOSAIC ---------- */
 .parallaxStrip {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -186,4 +357,5 @@
   font-size: 14px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
+  color: #fff;
 }
