@@ -25,6 +25,14 @@ export default function CTASection({
 }: Props) {
   return (
     <section className={styles.wrap}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1800&q=80"
+        alt=""
+        aria-hidden
+        className={styles.bgImage}
+        loading="lazy"
+      />
       <div className={styles.shell}>
         <span className={styles.eyebrow}>
           <span

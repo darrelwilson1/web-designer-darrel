@@ -1,9 +1,10 @@
 'use client';
 
 /* ============================================================
-   ProjectGrid — 6 cards in a staggered grid. Hover reveals a
-   red overlay + project name. Uses CSS gradients as cover art
-   placeholders so the build needs no image assets.
+   ProjectGrid — 6 cards in a staggered grid. Each card has a
+   real photographic cover (Unsplash) with a dark gradient and
+   a red overlay on hover. Hover reveals the project name, year
+   and category in white.
    ============================================================ */
 
 import styles from './ProjectGrid.module.css';
@@ -13,8 +14,10 @@ export type Project = {
   client: string;
   category: string;
   year: string;
-  /** any valid CSS background — gradient, image url, etc. */
-  art: string;
+  /** Cover image URL — should be a 16:9 or 4:5 ratio CDN image */
+  image: string;
+  /** Object-position override, e.g. 'center 30%' to nudge the focal point */
+  position?: string;
 };
 
 const DEFAULT_PROJECTS: Project[] = [
@@ -23,42 +26,54 @@ const DEFAULT_PROJECTS: Project[] = [
     client: 'Halcyon Audio',
     category: 'Brand × Web',
     year: '2025',
-    art: 'radial-gradient(circle at 30% 20%, #ff2d2d 0%, #6a0d0d 30%, #0a0a0a 70%)',
+    image:
+      'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1400&q=80',
+    position: 'center',
   },
   {
     name: 'Northbound',
     client: 'Northbound Capital',
     category: 'Identity',
     year: '2025',
-    art: 'linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 60%), repeating-linear-gradient(45deg, transparent 0 14px, rgba(255,255,255,0.04) 14px 15px)',
+    image:
+      'https://images.unsplash.com/photo-1554224155-1696413565d3?auto=format&fit=crop&w=1400&q=80',
+    position: 'center',
   },
   {
     name: 'Vertex',
     client: 'Vertex Mobility',
     category: 'Product',
     year: '2024',
-    art: 'conic-gradient(from 220deg at 60% 40%, #ff2d2d, #1a1a1a, #ff2d2d)',
+    image:
+      'https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=1400&q=80',
+    position: 'center 60%',
   },
   {
     name: 'Soma',
     client: 'Soma Skincare',
     category: 'E-commerce',
     year: '2024',
-    art: 'linear-gradient(160deg, #efe7df 0%, #cfa9a3 100%)',
+    image:
+      'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1400&q=80',
+    position: 'center',
   },
   {
     name: 'Tessera',
     client: 'Tessera Studio',
     category: 'Editorial',
     year: '2024',
-    art: 'linear-gradient(180deg, #0a0a0a 0%, #0a0a0a 50%, #ff2d2d 50%, #ff2d2d 100%)',
+    image:
+      'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=1400&q=80',
+    position: 'center 35%',
   },
   {
     name: 'Origin',
     client: 'Origin Robotics',
     category: 'Brand × Motion',
     year: '2023',
-    art: 'radial-gradient(ellipse at 70% 80%, #2a2a2a 0%, #0a0a0a 60%), linear-gradient(180deg, #1a1a1a, #0a0a0a)',
+    image:
+      'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1400&q=80',
+    position: 'center',
   },
 ];
 
@@ -71,7 +86,16 @@ export default function ProjectGrid({ projects = DEFAULT_PROJECTS }: { projects?
           className={`${styles.card} ${i % 3 === 1 ? styles.tall : ''}`}
           data-cursor="view"
         >
-          <div className={styles.cover} style={{ background: p.art }} />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={p.image}
+            alt={`${p.client} — ${p.category}`}
+            className={styles.cover}
+            style={{ objectPosition: p.position }}
+            loading="lazy"
+            decoding="async"
+          />
+          <div className={styles.tint} aria-hidden />
           <div className={styles.overlay}>
             <div className={styles.meta}>
               <span>{p.category}</span>

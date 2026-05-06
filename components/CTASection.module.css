@@ -7,6 +7,30 @@
   padding: clamp(80px, 14vw, 200px) var(--pad-x);
 }
 
+/* Photographic background — red multiply keeps the brand red
+   dominant while adding depth from the photo. */
+.bgImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  mix-blend-mode: multiply;
+  opacity: 0.85;
+  filter: contrast(1.1) saturate(0.9);
+  pointer-events: none;
+}
+/* Vignette so corners stay rich red */
+.wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(ellipse at center, transparent 30%, rgba(255,45,45,0.45) 100%);
+  pointer-events: none;
+}
+
 .shell {
   position: relative;
   max-width: var(--max-w);

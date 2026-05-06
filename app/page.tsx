@@ -175,26 +175,40 @@ export default function Home() {
 
           <div className={styles.parallaxStrip}>
             <ParallaxBlock strength={-0.18}>
-              <div
-                className={styles.tile}
-                style={{ height: '100%', background: 'radial-gradient(circle at 30% 20%, #ff2d2d, #6a0d0d 30%, #0a0a0a 70%)' }}
-              >
+              <div className={styles.tile} style={{ height: '100%' }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1200&q=80"
+                  alt="Halcyon Audio — brand and web project"
+                  className={styles.tileImg}
+                  loading="lazy"
+                />
                 <span>Halcyon · Brand × Web</span>
               </div>
             </ParallaxBlock>
             <ParallaxBlock strength={0.1}>
-              <div
-                className={styles.tile}
-                style={{ height: '100%', background: 'conic-gradient(from 220deg at 60% 40%, #ff2d2d, #1a1a1a, #ff2d2d)' }}
-              >
+              <div className={styles.tile} style={{ height: '100%' }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=1400&q=80"
+                  alt="Vertex Mobility — product project"
+                  className={styles.tileImg}
+                  style={{ objectPosition: 'center 60%' }}
+                  loading="lazy"
+                />
                 <span>Vertex · Product</span>
               </div>
             </ParallaxBlock>
             <ParallaxBlock strength={-0.24}>
-              <div
-                className={styles.tile}
-                style={{ height: '100%', background: 'linear-gradient(180deg, #0a0a0a 50%, #ff2d2d 50%)' }}
-              >
+              <div className={styles.tile} style={{ height: '100%' }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=1200&q=80"
+                  alt="Tessera Studio — editorial project"
+                  className={styles.tileImg}
+                  style={{ objectPosition: 'center 35%' }}
+                  loading="lazy"
+                />
                 <span>Tessera</span>
               </div>
             </ParallaxBlock>
