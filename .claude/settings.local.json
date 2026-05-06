@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "PowerShell(git init)"
+      "PowerShell(git init)",
+      "mcp__Claude_Preview__preview_start"
     ]
   }
 }
