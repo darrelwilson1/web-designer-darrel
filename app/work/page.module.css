@@ -1,0 +1,95 @@
+/* ============================================================
+   WORK PAGE
+   ============================================================ */
+
+.head {
+  padding: clamp(160px, 20vh, 220px) var(--pad-x) clamp(40px, 6vw, 80px);
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: clamp(24px, 5vw, 80px);
+  align-items: flex-end;
+}
+@media (max-width: 800px) { .head { grid-template-columns: 1fr; } }
+
+.title {
+  font-weight: 900;
+  font-size: clamp(56px, 12vw, 200px);
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+.title em {
+  font-style: italic;
+  color: var(--accent);
+  font-weight: 900;
+}
+
+.lede {
+  font-size: clamp(16px, 1.4vw, 22px);
+  line-height: 1.55;
+  color: #fff;
+  max-width: 460px;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 0 var(--pad-x);
+  max-width: var(--max-w);
+  margin: 0 auto clamp(40px, 5vw, 60px);
+}
+.filter {
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: 1.5px solid var(--line);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #fff;
+  transition: background 0.4s var(--ease), color 0.4s var(--ease), border-color 0.4s var(--ease);
+}
+.filter:hover, .filterActive {
+  background: var(--accent);
+  color: #0a0a0a;
+  border-color: var(--accent);
+}
+
+.parallax {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(20px, 3vw, 48px);
+  align-items: center;
+  padding: clamp(80px, 10vw, 160px) 0;
+  border-top: 1px solid var(--line);
+  margin-top: clamp(60px, 8vw, 120px);
+}
+@media (max-width: 800px) { .parallax { grid-template-columns: 1fr; } }
+
+.parallaxText {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.parallaxKicker {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.parallaxQuote {
+  font-weight: 900;
+  font-size: clamp(28px, 3.4vw, 48px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+.parallaxImg {
+  height: clamp(360px, 50vw, 560px);
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(ellipse at 70% 30%, rgba(255,45,45,0.4), transparent 55%),
+    linear-gradient(180deg, #1a1a1a, #0a0a0a 80%);
+}

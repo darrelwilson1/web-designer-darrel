@@ -1,0 +1,103 @@
+.footer {
+  background: #050505;
+  border-top: 1px solid var(--line);
+  padding: clamp(60px, 8vw, 120px) var(--pad-x) 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.shell {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(40px, 6vw, 80px);
+  position: relative;
+}
+
+.top {
+  display: grid;
+  grid-template-columns: 1.2fr 2fr;
+  gap: clamp(32px, 5vw, 80px);
+}
+@media (max-width: 800px) {
+  .top { grid-template-columns: 1fr; }
+}
+
+.brand {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+.mark {
+  width: 56px; height: 56px;
+  display: grid; place-items: center;
+  background: var(--accent);
+  color: #0a0a0a;
+  font-weight: 900;
+  font-size: 24px;
+  border-radius: 12px;
+  box-shadow: 0 14px 40px -16px var(--accent-glow);
+}
+.brandName {
+  font-weight: 900;
+  font-size: 24px;
+  letter-spacing: -0.02em;
+}
+.tagline {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--muted);
+  margin-top: 4px;
+  max-width: 220px;
+}
+
+.cols {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(20px, 3vw, 40px);
+}
+@media (max-width: 600px) {
+  .cols { grid-template-columns: repeat(2, 1fr); }
+}
+
+.col { display: flex; flex-direction: column; gap: 14px; }
+.label {
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.col li {
+  font-size: 14px;
+  font-weight: 400;
+  color: #fff;
+  transition: color 0.3s;
+}
+.col li a:hover { color: #fff; }
+
+.huge {
+  font-weight: 900;
+  font-size: clamp(120px, 22vw, 360px);
+  line-height: 0.8;
+  letter-spacing: -0.05em;
+  -webkit-text-stroke: 1.5px rgba(255,255,255,0.12);
+  color: transparent;
+  user-select: none;
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  padding-top: 24px;
+  flex-wrap: wrap;
+}

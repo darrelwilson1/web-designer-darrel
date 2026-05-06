@@ -1,0 +1,189 @@
+/* ============================================================
+   HOME PAGE
+   ============================================================ */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  align-items: center;
+  padding: clamp(120px, 16vh, 180px) var(--pad-x) clamp(60px, 10vh, 120px);
+  overflow: hidden;
+}
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; }
+}
+
+.heroLeft {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(24px, 4vw, 48px);
+}
+
+.eyebrowRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.eyebrowRow::before {
+  content: '';
+  width: 32px; height: 1px; background: var(--accent);
+}
+
+.heroTitle {
+  font-weight: 900;
+  font-size: clamp(48px, 9vw, 168px);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+.heroTitle .accent {
+  color: var(--accent);
+  font-style: italic;
+  font-weight: 900;
+}
+
+.heroSub {
+  font-size: clamp(15px, 1.2vw, 19px);
+  line-height: 1.55;
+  max-width: 520px;
+  color: #fff;
+}
+
+.heroCtas { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+
+.heroRight {
+  position: relative;
+  height: clamp(420px, 80vh, 720px);
+}
+@media (max-width: 900px) {
+  .heroRight { height: 60vh; margin-top: 30px; order: -1; }
+}
+
+.scrollHint {
+  position: absolute;
+  left: var(--pad-x);
+  bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  z-index: 3;
+}
+.scrollHint::before {
+  content: '';
+  width: 36px; height: 1px;
+  background: rgba(255,255,255,0.4);
+  animation: scrollLine 2.4s ease-in-out infinite;
+  transform-origin: left;
+}
+@keyframes scrollLine {
+  0%, 100% { transform: scaleX(0.4); }
+  50%      { transform: scaleX(1); }
+}
+
+/* --- intro section under hero --- */
+.intro {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: clamp(24px, 5vw, 80px);
+  align-items: start;
+}
+@media (max-width: 800px) {
+  .intro { grid-template-columns: 1fr; }
+}
+.introHead {
+  font-weight: 900;
+  font-size: clamp(36px, 5vw, 72px);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+}
+.introHead em {
+  font-style: italic;
+  color: var(--accent);
+  font-weight: 900;
+}
+.introCopy {
+  font-size: clamp(16px, 1.3vw, 22px);
+  line-height: 1.55;
+  color: #fff;
+}
+
+/* --- services teaser --- */
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(16px, 1.5vw, 24px);
+  margin-top: clamp(40px, 5vw, 64px);
+}
+@media (max-width: 800px) {
+  .servicesGrid { grid-template-columns: 1fr; }
+}
+
+/* --- shared section header --- */
+.sectionHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  margin-bottom: clamp(40px, 5vw, 80px);
+  flex-wrap: wrap;
+}
+.sectionTitle {
+  font-weight: 900;
+  font-size: clamp(40px, 6vw, 96px);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+.sectionMeta {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  max-width: 300px;
+  text-align: right;
+}
+
+/* --- featured work parallax block --- */
+.parallaxStrip {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 16px;
+  align-items: center;
+}
+.parallaxStrip > :nth-child(1) { grid-column: 1 / span 4; aspect-ratio: 4/5; }
+.parallaxStrip > :nth-child(2) { grid-column: 5 / span 5; aspect-ratio: 5/4; }
+.parallaxStrip > :nth-child(3) { grid-column: 10 / span 3; aspect-ratio: 3/5; }
+@media (max-width: 800px) {
+  .parallaxStrip { grid-template-columns: 1fr; }
+  .parallaxStrip > * { grid-column: 1 / -1 !important; aspect-ratio: 4/3 !important; }
+}
+.tile {
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  overflow: hidden;
+  position: relative;
+}
+.tile span {
+  position: absolute;
+  bottom: 18px; left: 18px;
+  font-weight: 900;
+  font-size: 14px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}

@@ -1,0 +1,39 @@
+.wrap {
+  width: 100%;
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: clamp(28px, 4vw, 48px) 0;
+  white-space: nowrap;
+}
+
+.track {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  will-change: transform;
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(40px, 6vw, 80px);
+  padding-right: clamp(40px, 6vw, 80px);
+  font-weight: 900;
+  font-size: clamp(48px, 8vw, 120px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.item:nth-child(2n) {
+  -webkit-text-stroke: 1.5px #fff;
+  color: transparent;
+}
+
+.dot {
+  font-size: 0.5em;
+  color: var(--accent);
+  line-height: 1;
+}

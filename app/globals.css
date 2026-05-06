@@ -1,0 +1,137 @@
+/* ============================================================
+   GLOBAL STYLES — design tokens, resets, typography, utilities
+   Edit brand colors and base type scale here.
+   ============================================================ */
+
+:root {
+  --bg: #0a0a0a;
+  --fg: #ffffff;
+  --accent: #ff2d2d;
+  --accent-glow: rgba(255, 45, 45, 0.45);
+  --muted: rgba(255, 255, 255, 0.82);
+  --line: rgba(255, 255, 255, 0.12);
+
+  --max-w: 1440px;
+  --pad-x: clamp(20px, 4vw, 80px);
+  --section-y: clamp(80px, 12vw, 180px);
+
+  --ease: cubic-bezier(0.6, 0.05, 0.1, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+body {
+  cursor: none;
+}
+@media (hover: none) and (pointer: coarse) {
+  body { cursor: auto; }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: none;
+}
+
+img, svg, canvas { display: block; max-width: 100%; }
+
+::selection {
+  background: var(--accent);
+  color: var(--fg);
+}
+
+/* ---------- Type scale ---------- */
+.display {
+  font-weight: 900;
+  font-size: clamp(56px, 11vw, 200px);
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+.h1 {
+  font-weight: 900;
+  font-size: clamp(44px, 8vw, 140px);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+}
+.h2 {
+  font-weight: 700;
+  font-size: clamp(32px, 5vw, 72px);
+  line-height: 1;
+  letter-spacing: -0.025em;
+}
+.eyebrow {
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.body {
+  font-weight: 400;
+  font-size: clamp(15px, 1.1vw, 18px);
+  line-height: 1.55;
+  color: #fff;
+}
+
+/* ---------- Layout helpers ---------- */
+.shell {
+  width: 100%;
+  max-width: var(--max-w);
+  margin-inline: auto;
+  padding: 0 var(--pad-x);
+}
+.section {
+  padding-top: var(--section-y);
+  padding-bottom: var(--section-y);
+  position: relative;
+}
+.divider {
+  height: 1px;
+  background: var(--line);
+  width: 100%;
+}
+
+/* ---------- Reveal mask animation ---------- */
+.reveal {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+}
+.reveal-inner {
+  display: inline-block;
+  transform: translateY(110%);
+  will-change: transform;
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

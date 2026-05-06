@@ -1,0 +1,126 @@
+/* ============================================================
+   ABOUT PAGE
+   ============================================================ */
+
+.head {
+  padding: clamp(160px, 20vh, 220px) var(--pad-x) clamp(40px, 6vw, 80px);
+}
+.title {
+  font-weight: 900;
+  font-size: clamp(56px, 14vw, 240px);
+  line-height: 0.86;
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+.title em {
+  font-style: italic;
+  color: var(--accent);
+  font-weight: 900;
+}
+
+.manifesto {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: clamp(24px, 5vw, 80px);
+  align-items: start;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: clamp(60px, 8vw, 120px) var(--pad-x);
+  border-top: 1px solid var(--line);
+}
+@media (max-width: 800px) { .manifesto { grid-template-columns: 1fr; } }
+
+.manifestoLabel {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.manifestoCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.manifestoCopy p {
+  font-size: clamp(18px, 1.5vw, 26px);
+  line-height: 1.45;
+  color: #fff;
+}
+.manifestoCopy p:first-child {
+  font-weight: 900;
+  font-size: clamp(28px, 3vw, 44px);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+/* --- people grid --- */
+.people {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 2vw, 28px);
+}
+@media (max-width: 900px) { .people { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 500px) { .people { grid-template-columns: 1fr; } }
+
+.person {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.avatar {
+  aspect-ratio: 4 / 5;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+}
+.avatar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.5));
+}
+.personName {
+  font-weight: 900;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+.personRole {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* --- shared section heading reused --- */
+.sectionHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  margin-bottom: clamp(40px, 5vw, 80px);
+  flex-wrap: wrap;
+}
+.sectionTitle {
+  font-weight: 900;
+  font-size: clamp(40px, 6vw, 96px);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+.sectionMeta {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  max-width: 300px;
+  text-align: right;
+}

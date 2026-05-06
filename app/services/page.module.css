@@ -1,0 +1,63 @@
+/* ============================================================
+   SERVICES PAGE
+   ============================================================ */
+
+.head {
+  padding: clamp(160px, 20vh, 220px) var(--pad-x) clamp(40px, 6vw, 80px);
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: clamp(24px, 5vw, 80px);
+  align-items: flex-end;
+  border-bottom: 1px solid var(--line);
+}
+@media (max-width: 800px) { .head { grid-template-columns: 1fr; } }
+
+.title {
+  font-weight: 900;
+  font-size: clamp(56px, 12vw, 200px);
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+.title em {
+  font-style: italic;
+  color: var(--accent);
+  font-weight: 900;
+}
+
+.lede {
+  font-size: clamp(16px, 1.4vw, 22px);
+  line-height: 1.55;
+  color: #fff;
+  max-width: 460px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(16px, 2vw, 28px);
+}
+@media (max-width: 800px) { .cards { grid-template-columns: 1fr; } }
+
+.disciplinesHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: clamp(40px, 5vw, 80px);
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.disciplinesTitle {
+  font-weight: 900;
+  font-size: clamp(40px, 6vw, 96px);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+.tag {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
