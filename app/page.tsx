@@ -92,16 +92,6 @@ export default function Home() {
             <CTAButton href="/work">See the work</CTAButton>
             <CTAButton href="/contact" variant="ghost">Start a project</CTAButton>
           </div>
-
-          {/* trust strip — recently shipped clients */}
-          <div className={styles.heroTrust}>
-            <span className={styles.trustLabel}>Recently shipped</span>
-            <div className={styles.trustLogos}>
-              {TRUST_LOGOS.map((c) => (
-                <span key={c} data-cursor="link">{c}</span>
-              ))}
-            </div>
-          </div>
         </div>
 
         <div className={styles.heroRight}>
@@ -114,6 +104,16 @@ export default function Home() {
           <span>/ sections</span>
         </span>
       </section>
+
+      {/* ---------- TRUST BAND (clients we've shipped with) ---------- */}
+      <div className={styles.trustBand}>
+        <span className={styles.trustLabel}>Recently shipped</span>
+        <div className={styles.trustLogos}>
+          {TRUST_LOGOS.map((c) => (
+            <span key={c} data-cursor="link">{c}</span>
+          ))}
+        </div>
+      </div>
 
       {/* ---------- INTRO ---------- */}
       <section className="section">

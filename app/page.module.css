@@ -2,19 +2,31 @@
    HOME PAGE
    ============================================================ */
 
-/* ---------- HERO ---------- */
+/* ---------- HERO ----------
+   Locked to a single viewport (100vh) on desktop. On mobile, the
+   3D scene stacks above the headline, so we relax to min-height to
+   prevent content overflow on shorter phones.
+   ============================================================ */
 .hero {
   position: relative;
-  min-height: 100vh;
+  height: 100vh;
+  min-height: 640px;
+  max-height: 1080px;
   display: grid;
-  grid-template-columns: 1.05fr 1fr;
+  grid-template-columns: 1.1fr 1fr;
   align-items: center;
-  padding: clamp(140px, 16vh, 200px) var(--pad-x) clamp(80px, 12vh, 140px);
+  padding: 110px var(--pad-x) 96px;
   overflow: hidden;
   isolation: isolate;
 }
 @media (max-width: 900px) {
-  .hero { grid-template-columns: 1fr; padding-top: 130px; }
+  .hero {
+    grid-template-columns: 1fr;
+    height: auto;
+    min-height: 100vh;
+    max-height: none;
+    padding: 120px var(--pad-x) 80px;
+  }
 }
 
 /* Soft red glow behind the 3D scene + ambient gradients */
@@ -94,7 +106,8 @@
   z-index: 3;
   display: flex;
   flex-direction: column;
-  gap: clamp(28px, 3.5vw, 44px);
+  gap: clamp(20px, 2.4vw, 32px);
+  max-width: 760px;
 }
 
 .eyebrowRow {
@@ -114,9 +127,9 @@
 
 .heroTitle {
   font-weight: 900;
-  font-size: clamp(56px, 9.5vw, 184px);
-  line-height: 0.88;
-  letter-spacing: -0.045em;
+  font-size: clamp(44px, 7.2vw, 124px);
+  line-height: 0.92;
+  letter-spacing: -0.04em;
   text-transform: uppercase;
   color: #fff;
 }
@@ -140,14 +153,16 @@
 
 .heroCtas { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
 
-/* Trust strip — clients we’ve recently worked with */
-.heroTrust {
+/* Trust band — its own full-width strip directly below hero */
+.trustBand {
   display: flex;
   align-items: center;
-  gap: clamp(20px, 3vw, 36px);
-  margin-top: clamp(8px, 2vw, 16px);
-  padding-top: clamp(24px, 3vw, 40px);
+  gap: clamp(20px, 3vw, 48px);
+  padding: clamp(20px, 2.4vw, 28px) var(--pad-x);
   border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  max-width: var(--max-w);
+  margin-inline: auto;
   flex-wrap: wrap;
 }
 .trustLabel {
@@ -159,6 +174,7 @@
   display: inline-flex;
   align-items: center;
   gap: 12px;
+  flex: 0 0 auto;
 }
 .trustLabel::before {
   content: '';
@@ -168,16 +184,17 @@
 .trustLogos {
   display: inline-flex;
   align-items: center;
-  gap: clamp(18px, 2.5vw, 32px);
+  gap: clamp(18px, 3vw, 40px);
   flex-wrap: wrap;
+  flex: 1;
 }
 .trustLogos span {
-  font-size: clamp(15px, 1.3vw, 19px);
+  font-size: clamp(15px, 1.4vw, 22px);
   font-weight: 900;
   letter-spacing: -0.01em;
   text-transform: uppercase;
   color: #fff;
-  opacity: 0.75;
+  opacity: 0.78;
   transition: opacity 0.35s var(--ease), color 0.35s var(--ease);
   cursor: none;
 }
@@ -188,11 +205,12 @@
 
 .heroRight {
   position: relative;
-  height: clamp(420px, 82vh, 760px);
+  height: 100%;
+  min-height: 360px;
   z-index: 2;
 }
 @media (max-width: 900px) {
-  .heroRight { height: 56vh; margin-top: 30px; order: -1; }
+  .heroRight { height: 50vh; min-height: 320px; margin-top: 12px; order: -1; }
 }
 
 /* Bottom-left scroll cue */
