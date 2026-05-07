@@ -71,7 +71,9 @@ export default function Home() {
           </span>
         </div>
 
-        <div className={styles.heroLeft}>
+        {/* main 2-col body — heroLeft text + heroRight 3D scene */}
+        <div className={styles.heroBody}>
+          <div className={styles.heroLeft}>
           <div className={styles.eyebrowRow}>
             <span>Independent · Brooklyn · Lisbon · est. 2014</span>
           </div>
@@ -94,15 +96,19 @@ export default function Home() {
           </div>
         </div>
 
-        <div className={styles.heroRight}>
-          <HeroScene />
+          <div className={styles.heroRight}>
+            <HeroScene />
+          </div>
         </div>
 
-        <span className={styles.scrollHint}>Scroll to explore</span>
-        <span className={styles.scrollCounter}>
-          <strong>06</strong>
-          <span>/ sections</span>
-        </span>
+        {/* bottom strip — scroll cue + section counter, isolated from heroBody */}
+        <div className={styles.heroFooter}>
+          <span className={styles.scrollHint}>Scroll to explore</span>
+          <span className={styles.scrollCounter}>
+            <strong>06</strong>
+            <span>/ sections</span>
+          </span>
+        </div>
       </section>
 
       {/* ---------- TRUST BAND (clients we've shipped with) ---------- */}

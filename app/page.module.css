@@ -3,30 +3,62 @@
    ============================================================ */
 
 /* ---------- HERO ----------
-   Locked to a single viewport (100vh) on desktop. On mobile, the
-   3D scene stacks above the headline, so we relax to min-height to
-   prevent content overflow on shorter phones.
+   Locked to a single viewport (100vh) on desktop. Three vertical
+   bands stacked with flex:
+     1. heroMeta  — absolute, top corner pill + index
+     2. heroBody  — flexible main row (heroLeft + heroRight grid)
+     3. heroFooter— fixed-height strip with scroll cues, separated
+                    from content so they can never overlap CTAs.
    ============================================================ */
 .hero {
   position: relative;
   height: 100vh;
   min-height: 640px;
   max-height: 1080px;
-  display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  align-items: center;
-  padding: 110px var(--pad-x) 96px;
+  display: flex;
+  flex-direction: column;
+  padding: 100px var(--pad-x) 24px;
   overflow: hidden;
   isolation: isolate;
 }
 @media (max-width: 900px) {
   .hero {
-    grid-template-columns: 1fr;
     height: auto;
     min-height: 100vh;
     max-height: none;
-    padding: 120px var(--pad-x) 80px;
+    padding: 110px var(--pad-x) 24px;
   }
+}
+
+/* main two-column band — fills the flexible space between the
+   top meta strip and the bottom scroll-cue strip */
+.heroBody {
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  align-items: center;
+  gap: clamp(24px, 4vw, 80px);
+  padding-bottom: 28px;   /* breathing room above the .heroFooter strip */
+  min-height: 0;          /* allow grid children to shrink in flex parent */
+}
+@media (max-width: 900px) {
+  .heroBody { grid-template-columns: 1fr; padding-bottom: 16px; }
+}
+
+/* bottom strip — owns the scroll cue + counter, never overlaps
+   content because it lives in its own flex row */
+.heroFooter {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #fff;
 }
 
 /* Soft red glow behind the 3D scene + ambient gradients */
@@ -127,8 +159,8 @@
 
 .heroTitle {
   font-weight: 900;
-  font-size: clamp(44px, 7.2vw, 124px);
-  line-height: 0.92;
+  font-size: clamp(40px, 6.4vw, 108px);
+  line-height: 0.94;
   letter-spacing: -0.04em;
   text-transform: uppercase;
   color: #fff;
@@ -208,25 +240,18 @@
   height: 100%;
   min-height: 360px;
   z-index: 2;
+  align-self: stretch;
 }
 @media (max-width: 900px) {
-  .heroRight { height: 50vh; min-height: 320px; margin-top: 12px; order: -1; }
+  .heroRight { height: 46vh; min-height: 300px; margin-top: 12px; order: -1; }
 }
 
-/* Bottom-left scroll cue */
+/* Inline scroll cue inside .heroFooter — no absolute positioning,
+   so it can never collide with the heroLeft column above. */
 .scrollHint {
-  position: absolute;
-  left: var(--pad-x);
-  bottom: 28px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 14px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #fff;
-  z-index: 3;
 }
 .scrollHint::before {
   content: '';
@@ -240,32 +265,26 @@
   50%      { transform: scaleX(1); }
 }
 
-/* Bottom-right scroll counter (modern flourish) */
+/* Right-aligned scroll counter (modern flourish) */
 .scrollCounter {
-  position: absolute;
-  right: var(--pad-x);
-  bottom: 28px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  z-index: 3;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #fff;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
 }
 .scrollCounter strong {
   font-weight: 900;
-  font-size: 28px;
+  font-size: 22px;
   letter-spacing: -0.03em;
   color: #fff;
   line-height: 1;
 }
 .scrollCounter span {
-  color: rgba(255,255,255,0.6);
+  color: rgba(255,255,255,0.65);
 }
-@media (max-width: 600px) { .scrollCounter { display: none; } }
+@media (max-width: 600px) {
+  .scrollCounter strong { font-size: 18px; }
+  .scrollCounter span { display: none; }
+}
 
 /* ---------- INTRO ---------- */
 .intro {
