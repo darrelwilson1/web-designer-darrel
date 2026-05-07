@@ -11,8 +11,10 @@
    the original GSAP version.
    ============================================================ */
 
+import type { ElementType } from 'react';
+
 type Props = {
-  as?: keyof JSX.IntrinsicElements;
+  as?: ElementType;
   children: string;
   className?: string;
   /** seconds before the first word starts */
@@ -31,7 +33,6 @@ export default function RevealText({
   const words = children.split(' ');
 
   return (
-    // @ts-expect-error dynamic tag
     <Tag className={className}>
       {words.map((w, i) => (
         <span key={i} className="reveal" style={{ marginRight: '0.25em' }}>
