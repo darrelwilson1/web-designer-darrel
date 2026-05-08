@@ -61,7 +61,7 @@
   color: #fff;
 }
 
-/* Soft red glow behind the 3D scene + ambient gradients */
+/* Soft teal glow behind the 3D scene to complement the orb's rim */
 .hero::before {
   content: '';
   position: absolute;
@@ -69,7 +69,7 @@
   top: 0;
   bottom: 0;
   width: 70vw;
-  background: radial-gradient(ellipse at 60% 50%, rgba(255,45,45,0.18) 0%, rgba(255,45,45,0) 60%);
+  background: radial-gradient(ellipse at 60% 50%, rgba(34, 230, 215, 0.18) 0%, rgba(34, 230, 215, 0) 60%);
   z-index: 0;
   pointer-events: none;
 }

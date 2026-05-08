@@ -93,14 +93,21 @@ const FRAG = /* glsl */ `
 
   void main() {
     float fres = pow(1.0 - clamp(dot(vNormal, vViewDir), 0.0, 1.0), 2.2);
-    vec3 deepRed   = vec3(0.55, 0.04, 0.06);
-    vec3 hotRed    = vec3(1.0, 0.18, 0.18);
-    vec3 white     = vec3(1.0);
+
+    // Teal gradient palette
+    vec3 deepTeal = vec3(0.02, 0.18, 0.24);   // ~#0A2E3D core
+    vec3 midTeal  = vec3(0.04, 0.55, 0.62);   // ~#0A8C9E mid-rim
+    vec3 hotTeal  = vec3(0.20, 0.96, 0.92);   // ~#33F5EB bright tip
+    vec3 white    = vec3(1.0);
 
     float pulse = 0.5 + 0.5 * sin(uTime * 1.4);
-    vec3 base   = mix(deepRed, hotRed, fres);
-    base       += white * fres * fres * 0.65;
-    base       += hotRed * (vDisp * 1.3 + 0.15) * (0.6 + pulse * 0.4);
+
+    // Two-stop gradient: deep -> mid based on fresnel, then push
+    // toward hot teal at the silhouette edge.
+    vec3 base  = mix(deepTeal, midTeal, fres);
+    base       = mix(base, hotTeal, smoothstep(0.55, 1.0, fres));
+    base      += white * fres * fres * 0.55;
+    base      += hotTeal * (vDisp * 1.2 + 0.12) * (0.55 + pulse * 0.4);
 
     float a = clamp(0.55 + fres * 0.6, 0.0, 1.0);
     gl_FragColor = vec4(base, a);
@@ -151,7 +158,8 @@ export default function HeroScene() {
         varying vec3 vN; varying vec3 vV;
         void main(){
           float f = pow(1.0 - clamp(dot(vN,vV),0.0,1.0), 3.0);
-          gl_FragColor = vec4(1.0, 0.16, 0.18, f * 0.55);
+          // Bright teal halo to match the main shader rim
+          gl_FragColor = vec4(0.22, 0.95, 0.90, f * 0.55);
         }`,
       transparent: true,
       blending: THREE.AdditiveBlending,
